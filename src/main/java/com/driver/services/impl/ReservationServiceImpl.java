@@ -41,7 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
                 spotType = 100;
             }
 
-            if (s.getPricePerHour() < price && spotType > numberOfWheels && s.isOccupied() == false) {
+            if (s.getPricePerHour() < price && spotType > numberOfWheels && s.getOccupied() == false) {
                 price = s.getPricePerHour();
                 minimumPriceSpot = s;
             }
