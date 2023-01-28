@@ -66,15 +66,15 @@ public class ReservationServiceImpl implements ReservationService {
         minimumPriceSpot.setReservationList(spotReservationList);
 
         // for user Repository
-        // List<Reservation> userReservationList = user.getReservationList();
-        // if (userReservationList == null) {
-        // userReservationList = new ArrayList<>();
-        // }
-        // userReservationList.add(reservation);
-        // user.setReservationList(userReservationList);
+        List<Reservation> userReservationList = user.getReservationList();
+        if (userReservationList == null) {
+            userReservationList = new ArrayList<>();
+        }
+        userReservationList.add(reservation);
+        user.setReservationList(userReservationList);
 
         // for saving in all repository
-        spotRepository3.save(minimumPriceSpot);
+        userRepository3.save(user);
         return reservation;
 
     }
