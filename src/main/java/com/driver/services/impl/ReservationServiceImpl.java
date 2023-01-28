@@ -41,7 +41,7 @@ public class ReservationServiceImpl implements ReservationService {
                 spotType = 100;
             }
 
-            if (s.getPricePerHour() < price && spotType > numberOfWheels && s.getOccupied() == false) {
+            if (s.getPricePerHour() < price && spotType >= numberOfWheels && s.getOccupied() == false) {
                 price = s.getPricePerHour();
                 minimumPriceSpot = s;
             }
@@ -66,13 +66,12 @@ public class ReservationServiceImpl implements ReservationService {
         minimumPriceSpot.setReservationList(spotReservationList);
 
         // for user Repository
-        List<Reservation> userReservationList = user.getReservationList();
-        if (userReservationList == null) {
-            userReservationList = new ArrayList<>();
-        }
-        userReservationList.add(reservation);
-        user.setReservationList(userReservationList);
-        userRepository3.save(user);
+        // List<Reservation> userReservationList = user.getReservationList();
+        // if (userReservationList == null) {
+        // userReservationList = new ArrayList<>();
+        // }
+        // userReservationList.add(reservation);
+        // user.setReservationList(userReservationList);
 
         // for saving in all repository
         spotRepository3.save(minimumPriceSpot);
