@@ -46,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
                 minimumPriceSpot = s;
             }
         }
-        if (minimumPriceSpot == null) {
+        if (minimumPriceSpot == null || user == null) {
             throw new Exception("Cannot make reservation");
         }
 
@@ -74,7 +74,7 @@ public class ReservationServiceImpl implements ReservationService {
         user.setReservationList(userReservationList);
 
         // for saving in all repository
-        reservationRepository3.save(reservation);
+        userRepository3.save(user);
         return reservation;
 
     }
