@@ -47,7 +47,7 @@ public class ReservationServiceImpl implements ReservationService {
             }
         }
         if (minimumPriceSpot == null) {
-            throw new Exception("Reservation can not be made");
+            throw new Exception("Cannot make reservation");
         }
 
         // for Reservation Repository

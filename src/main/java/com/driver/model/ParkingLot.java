@@ -25,6 +25,10 @@ public class ParkingLot {
         this.address = address;
     }
 
+    public ParkingLot(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

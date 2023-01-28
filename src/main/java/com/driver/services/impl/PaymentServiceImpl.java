@@ -21,7 +21,7 @@ public class PaymentServiceImpl implements PaymentService {
         int numberOfHours = reservation.getNumberOfHours();
         int bill = numberOfHours * pricePerHour;
         if (amountSent < bill) {
-            throw new Exception("Insufficient Balance");
+            throw new Exception("Insufficient Amount");
         }
         char[] arr = mode.toCharArray();
         for (int i = 0; i < arr.length; i++) {
@@ -48,7 +48,6 @@ public class PaymentServiceImpl implements PaymentService {
         // for Reservation Repository
         reservation.setPayment(payment);
         reservationRepository2.save(reservation);
-
         return payment;
     }
 }
