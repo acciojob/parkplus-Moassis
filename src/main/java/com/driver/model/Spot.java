@@ -27,6 +27,16 @@ public class Spot {
     public Spot() {
     }
 
+    public Spot(int id, SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot,
+            List<Reservation> reservationList) {
+        this.id = id;
+        this.spotType = spotType;
+        this.pricePerHour = pricePerHour;
+        this.occupied = occupied;
+        this.parkingLot = parkingLot;
+        this.reservationList = reservationList;
+    }
+
     public Spot(SpotType spotType, int pricePerHour, boolean occupied, ParkingLot parkingLot) {
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
@@ -37,6 +47,12 @@ public class Spot {
     public Spot(SpotType spotType, int pricePerHour) {
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
+    }
+
+    public Spot(SpotType spotType, int pricePerHour, boolean occupied) {
+        this.spotType = spotType;
+        this.pricePerHour = pricePerHour;
+        this.occupied = occupied;
     }
 
     public int getId() {
