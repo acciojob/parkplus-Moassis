@@ -24,7 +24,13 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels)
             throws Exception {
-        User user = userRepository3.findById(userId).get();
+        User user = null;
+        try {
+            user = userRepository3.findById(userId).get();
+        } catch (Exception e) {
+            throw new Exception("Cannot make reservation");
+        }
+
         ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
 
         // Finding Minimum Price Spot
@@ -46,7 +52,7 @@ public class ReservationServiceImpl implements ReservationService {
                 minimumPriceSpot = s;
             }
         }
-        if (minimumPriceSpot == null || user == null) {
+        if (minimumPriceSpot == null) {
             throw new Exception("Cannot make reservation");
         }
 
@@ -58,13 +64,12 @@ public class ReservationServiceImpl implements ReservationService {
 
         // for spot Repository
         minimumPriceSpot.setOccupied(true);
-        // List<Reservation> spotReservationList =
-        // minimumPriceSpot.getReservationList();
-        // if (spotReservationList == null) {
-        // spotReservationList = new ArrayList<>();
-        // }
-        // spotReservationList.add(reservation);
-        // minimumPriceSpot.setReservationList(spotReservationList);
+        List<Reservation> spotReservationList = minimumPriceSpot.getReservationList();
+        if (spotReservationList == null) {
+            spotReservationList = new ArrayList<>();
+        }
+        spotReservationList.add(reservation);
+        minimumPriceSpot.setReservationList(spotReservationList);
 
         // for user Repository
         List<Reservation> userReservationList = user.getReservationList();
@@ -73,9 +78,10 @@ public class ReservationServiceImpl implements ReservationService {
         }
         userReservationList.add(reservation);
         user.setReservationList(userReservationList);
+        userRepository3.save(user);
 
         // for saving in all repository
-        userRepository3.save(user);
+        spotRepository3.save(minimumPriceSpot);
         return reservation;
 
     }

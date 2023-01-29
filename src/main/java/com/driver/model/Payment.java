@@ -15,6 +15,7 @@ public class Payment {
     PaymentMode paymentMode;
 
     @OneToOne
+    @JoinColumn
     Reservation reservation;
 
     public Payment() {
